@@ -1,5 +1,13 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File; 
+
 
 public class ApplicationRobot{
     public static void main(String[] args) throws Exception{
@@ -41,10 +49,12 @@ public class ApplicationRobot{
 
         lukas.delay(1000);
 
-        lukas.keyPress(0x5B);
-        lukas.keyPress(16);
-        lukas.keyPress(83);
-
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle bounds = new Rectangle(screenSize);
+        BufferedImage image = lukas.createScreenCapture(bounds); 
+        File file = new File("myScreenShot.png");
+        ImageIO.write(image,"png", file);
+        System.out.println("A screenshot is captured to " + file.getPath());
 
     }
 }
